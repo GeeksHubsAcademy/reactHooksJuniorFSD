@@ -1,5 +1,5 @@
 
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Boton from '../../components/Boton/Boton';
 
 import './Register.css';
@@ -17,6 +17,31 @@ const Register = () => {
     });
 
     const [mensaje, setMensaje] = useState('');
+
+    //USEEFFECT
+
+
+    useEffect(()=> {
+        //Se ejecuta tras la primera actualización (montado), equivale a componentDidMount()
+        console.log("HOLA, COMPONENTE MONTADO POR PRIMERA VEZ");
+    },[]);
+
+    useEffect(()=> {
+        //Se actualiza el estado, es decir, equivale a componentDidUpdate()
+        if(user.nombre !== ""){
+            console.log(user);
+        }
+    });
+
+    useEffect(()=>{
+
+        return()=>{
+            //Equivale al componentWillUnmount()
+            console.log("ME HE DESMONTADO, ADIOS");
+        }
+    },[]);
+
+    
 
 
     //HANDLERS

@@ -1,0 +1,12 @@
+{
+    "idleHeartbeats": 1409,
+    "navigatingHeartbeats": 249,
+    "totalCodingHeartbeats": 1913,
+    "languageHeartbeats": {
+        "javascriptreact": 1913
+    },
+    "fileHeartbeats": {
+        "src/containers/Register/Register.jsx": 1519,
+        "src/containers/Login/Login.jsx": 394
+    }
+}
