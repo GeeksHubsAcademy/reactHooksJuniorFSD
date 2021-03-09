@@ -2,6 +2,9 @@
 import React,{useState, useEffect} from 'react';
 import Boton from '../../components/Boton/Boton';
 
+
+import checkError from '../../utiles/uti';
+
 import './Register.css';
 
 
@@ -24,13 +27,12 @@ const Register = () => {
     useEffect(()=> {
         //Se ejecuta tras la primera actualización (montado), equivale a componentDidMount()
         console.log("HOLA, COMPONENTE MONTADO POR PRIMERA VEZ");
+        
     },[]);
 
     useEffect(()=> {
         //Se actualiza el estado, es decir, equivale a componentDidUpdate()
-        if(user.nombre !== ""){
-            console.log(user);
-        }
+       
     });
 
     useEffect(()=>{
@@ -57,17 +59,17 @@ const Register = () => {
     const enviaDatos = async () => {
 
         //Comprobación de errores
+        
+        setMensaje('');
+       
+        let mensajeError = checkError(user);
 
-        if(! /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/.test(user.email) ){
-            setMensaje("El email no tiene el formato esperado");
+        setMensaje(mensajeError);
+
+        if(mensajeError){
             return;
         }
-
-        if(user.nombre == ''){
-            setMensaje("Debes de rellenar el campo nombre");
-            return
-        }
-
+        
         //Body a enviar al backend
 
         let body = {
@@ -78,7 +80,7 @@ const Register = () => {
 
         }
 
-        console.log("el body es......",body);
+        console.log("FASE FINAL... 3 . 2 ..1 DESPEGUE",body);
         
 
         //Proceso de envio

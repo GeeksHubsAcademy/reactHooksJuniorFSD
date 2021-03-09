@@ -1,12 +1,16 @@
 {
-    "idleHeartbeats": 1409,
-    "navigatingHeartbeats": 249,
-    "totalCodingHeartbeats": 1913,
+    "idleHeartbeats": 3249,
+    "navigatingHeartbeats": 841,
+    "totalCodingHeartbeats": 5094,
     "languageHeartbeats": {
-        "javascriptreact": 1913
+        "javascriptreact": 3860,
+        "plaintext": 45,
+        "javascript": 1189
     },
     "fileHeartbeats": {
-        "src/containers/Register/Register.jsx": 1519,
-        "src/containers/Login/Login.jsx": 394
+        "src/containers/Register/Register.jsx": 3421,
+        "src/containers/Login/Login.jsx": 439,
+        "d:\\fsdEnero\\React\\Reacthooks\\hooks1\\src\\containers\\Login\\Login.jsx.git": 45,
+        "src/utiles/uti.js": 1189
     }
 }
