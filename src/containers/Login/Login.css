@@ -1,0 +1,16 @@
+
+.padreLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.vistaLogin {
+    height: 20em;
+    width: 18em;
+
+    
+
+    background-color: lightcyan;
+}

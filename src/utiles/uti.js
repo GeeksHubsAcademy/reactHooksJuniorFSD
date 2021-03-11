@@ -1,4 +1,4 @@
-
+import moment from 'moment';
 
 //FUNCIONES ÚTILES Y MISCELANEA.
 
@@ -50,4 +50,22 @@ const checkError = (datosCheck) => {
 
 };
 
-export default checkError;
+const checkAge = (birth, age) => {
+
+
+    let actualDate = moment().format('YYYY-MM-DD');
+        
+    let years = moment(actualDate).diff(birth, "years");
+   
+    if(years <= age){
+        
+        return "La edad especificada debe ser mayor de " + age;
+    }else{
+        return;
+    }
+}
+
+export {
+    checkError,
+    checkAge
+};

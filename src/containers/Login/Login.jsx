@@ -1,42 +1,88 @@
+import React , {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import axios from 'axios';
+import {checkError} from '../../utiles/uti';
+
+import './Login.css';
+
+const Login = () => {
+
+    let history = useHistory();
+
+    //HOOKS 
+
+    const [dataLogin, setDataLogin] = useState({
+        email : '',
+        password : ''
+    });
+
+    const [mensaje, setMensaje] = useState('');
 
 
-import React from "react";
+    //CICLOS USEEFFECT
+
+    useEffect(()=> {
+        //Equivale a componentDidMount()
+
+    },[]);
+
+    useEffect(()=> {
+        //Equivale a componentDidUpdate()
+
+    });
 
 
-class Login extends React.Component {
-    
-    constructor (props) {
-        super(props);
+    //MANEJADORES
 
-        this.state = {
-            email : "",
-            password: ""
-        }
+    const manejaEstado = (ev) => {
+        setDataLogin({...dataLogin, [ev.target.name] : ev.target.value});
         
-    };
-
-    componentDidMount(){
-        //CUANDO EL COMPONENTE SE HA MONTADO
     }
 
-    componentDidUpdate(){
-        //CUANDO EL COMPONENTE SE ACTUALIZA
+    //FUNCIONES
+
+    const sendData = async () => {
+        //Comprobacion de errores
+
+        setMensaje('');
+
+        let mensajeError = checkError(dataLogin);
+        
+        setMensaje(mensajeError);
+
+        if(mensajeError){
+            return;
+        }
+
+        // let resultado = await axios.post('endpoint', dataLogin);
+
+        // //Tenemos token e Id de user como mínimo y guardamos en localStorage
+
+        // localStorage.setItem("datosLoginUser", resultado);
+        // localStorage.setItem('login', true);
+        //Redireccionamos.
+
+        return setTimeout( () => {
+            history.push('');
+        }, 1000);
+
     }
 
-    componentWillUnmount(){
-        //CUANDO EL COMPONENTE SE DESMONTA
-    }
-    
-    render() {
-        return(
-            <div>
-                Soy el componente Login
+    return(
+        <div className="padreLogin">
+            <div className="vistaLogin">
+                <pre>{JSON.stringify(dataLogin, null,2)}</pre>
+                <p>E-mail</p>
+                <input type="email" maxLength="30" placeholder="" name="email" onChange={manejaEstado}></input>
+                <p>Password</p>
+                <input type="password" maxLength="12" placeholder="" name="password" onChange={manejaEstado}></input>
+
+                <button onClick={()=> sendData()}>LOGIN</button>
             </div>
-        );
-    };
-    
-    
-};
+        </div>
+    )
+}
 
 
 export default Login;
+

@@ -1,25 +1,30 @@
 
 import React,{useState, useEffect} from 'react';
+// import {useHistory} from 'react-router-dom';
 import Boton from '../../components/Boton/Boton';
 
 
-import checkError from '../../utiles/uti';
+import {checkError, checkAge} from '../../utiles/uti';
 
 import './Register.css';
 
 
 const Register = () => {
 
+    // let history = useHistory();
+
     //HOOKS 
 
     const [user, setUser] = useState({
         nombre : '',
         email : '',
-        password : ''
+        password : '',
+        date : ''
         
     });
 
     const [mensaje, setMensaje] = useState('');
+    const [mensajeFecha, setMensajeFecha] = useState('');
 
     //USEEFFECT
 
@@ -32,7 +37,7 @@ const Register = () => {
 
     useEffect(()=> {
         //Se actualiza el estado, es decir, equivale a componentDidUpdate()
-       
+        
     });
 
     useEffect(()=>{
@@ -50,7 +55,7 @@ const Register = () => {
 
     const manejaEstado = (ev) => {
         setUser({...user, [ev.target.name]: ev.target.type === "number" ? +ev.target.value : ev.target.value});
-     
+        
     }
 
 
@@ -58,12 +63,18 @@ const Register = () => {
 
     const enviaDatos = async () => {
 
-        //Comprobación de errores
+        //Comprobación de errores, primero fecha
         
         setMensaje('');
-       
-        let mensajeError = checkError(user);
+        let errorFecha = checkAge(user.date,16);
+        setMensajeFecha(errorFecha);
 
+        if(errorFecha){
+            return
+        }
+        
+        let mensajeError = checkError(user);
+        
         setMensaje(mensajeError);
 
         if(mensajeError){
@@ -76,7 +87,8 @@ const Register = () => {
 
             nombre : user.nombre,
             email : user.email,
-            password : user.password
+            password : user.password,
+            date : user.date
 
         }
 
@@ -102,13 +114,15 @@ const Register = () => {
             <input type="email" maxLength="30" placeholder="" name="email" onChange={manejaEstado}></input>
             <p>Password : </p>
             <input type="password" maxLength="12" placeholder="" name="password" onChange={manejaEstado}></input>
-
+            <p>Fecha nacimiento : </p>
+            <input type="date" maxLength="50" name="date" onChange={manejaEstado}></input>
+            <div>{mensaje}</div>
             </div>
 
             <button onClick={()=> enviaDatos()}>Envia datos al backend</button>
 
             <Boton nombre='Home' destino=''/>
-            <div>{mensaje}</div>
+            <div>{mensajeFecha}</div>
         </div>
     );
 }
